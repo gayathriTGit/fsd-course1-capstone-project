@@ -1,0 +1,96 @@
+<div py-4>
+    <p></p>
+</div>
+<div class="container-md">
+    <div class="card shadow-sm mb-2" style="width: 35rem;">
+        <div class="card-header bg-info text-black">
+            <h4 class="mb-0" id="add-meeting">Create a Meeting Schedule</h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="meetingForm">
+                <div class="mb-8">
+                    <label for="clientname" class="form-label">Client</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="clientid">
+                        <option *ngFor="let client of allClients" value="{{client.id}}">{{client.name}}
+                        </option>
+                    </select>
+                    <label for="topic" class="form-label">Meeting Topic</label>
+                    <input type="text" class="form-control" id="topic" formControlName="topic" name="topic" required />
+                    <label for="noofpeople" class="form-label">Number of People</label>
+                    <input type="number" class="form-control" id="noofpeople" formControlName="noofpeople"
+                        name="noofpeople" required />
+                    <label for="starttime" class="form-label">Start Time</label>
+                    <input type="datetime-local" class="form-control" id="starttime" formControlName="starttime"
+                        name="starttime" required />
+                </div>
+                <div class="d-grid">
+                    <button id="btn-submit" type="submit" class="btn btn-info" (click)="addMeeting()">
+                        Schedule
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div class="offcanvas offcanvas-end w-50 show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+    <div class="offcanvas-header" style="background-color: #0dcaf0">
+        <h6 class="offcanvas-title" id="offcanvasLabel">Meetings List</h6>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Meetings List Component Template -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 mx-auto" *ngFor="let meeting of allMeetings">
+                    <!-- Card for meetings list -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-info text-black">
+                            <h4 class="mb-0">{{meeting.clientname}}</h4>
+                        </div>
+
+                        <div class="card-body">
+                            <!-- No meetings message -->
+                            <div *ngIf="allMeetings.length === 0" class="text-center py-4">
+                                <i class="bi bi-clipboard-x fs-1 text-muted"></i>
+                                <p class="mt-2 text-muted">
+                                    No meetings scheduled yet. Schedule a meeting now!
+                                </p>
+                            </div>
+                            <!-- Meetings list -->
+                            <ul class="list-group" *ngIf="allMeetings.length > 0">
+                                <li 
+                                    class="list-group-item d-flex justify-content-end align-items-left">
+                                    <div class="form-check">
+                                    <p class="mb-0 text-muted small">{{meeting.topic}}</p>
+                                    <p class="mb-0 text-muted small">{{meeting.noofpeople}} people are attending </p>
+                                    <span class="badge bg-info rounded-pill">{{ displayMeetingTimeasUTCString(meeting.starttime)}}</span>
+                                </div>
+                                <ul class="nav nav-tabs">
+                                    <li class="nav-item">
+                                      <a class="nav-link" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                                        <i class="bi bi-three-dots"></i>
+                                      </a>
+                                      <ul class="dropdown-menu">
+                                        <li>
+                                          <a class="dropdown-item" >
+                                            <i class="bi bi-pencil-fill"></i> Edit Meeting
+                                          </a>
+                                        </li>
+                                        <li>
+                                          <a class="dropdown-item" >
+                                            <i class="bi bi-trash"></i> Delete Meeting
+                                          </a>
+                                        </li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

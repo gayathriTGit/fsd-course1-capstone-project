@@ -1,168 +1,118 @@
-<!-- Cients List Component Template -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <!-- Card for clients list -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-info text-black">
-                    <h4 class="mb-0">Clients List</h4>
-                </div>
-
-                <div class="card-body">
-                    <!-- No clients message -->
-                    <div *ngIf="allClients.length === 0" class="text-center py-4">
-                        <i class="bi bi-clipboard-x fs-1 text-muted"></i>
-                        <p class="mt-2 text-muted">
-                            No clients available. Add a new client to get started!
-                        </p>
-                    </div>
-
-                    <!-- Clients list -->
-                    <!-- [ngClass] allows me to display a class depending on a condition -->
-                    <ul class="list-group" *ngIf="allClients.length > 0">
-                        <li *ngFor="let client of allClients"
-                            class="list-group-item d-flex justify-content-between align-items-center">
-                            <div class="form-check">
-                                <p class="mb-0 medium"><strong>{{client.name}} </strong>
-                                </p>
-                                <p class="mb-0 text-muted small">{{client.address1}}
-                                    {{client.address2}}
-                                    {{client.city}}, {{client.state}}</p>
-                                <p class="mb-0 text-muted small">{{client.phone}}
-                                    <i class="bi bi-telephone-fill"></i>
-                                </p>
-                                <p class="mb-0 text-muted small">{{client.email}}
-                                    <i class="bi bi-vector-pen"></i>
-                                </p>
-                                <span class="badge bg-info rounded-pill">{{client.username}} </span>
-                            </div>
-                            
-                            <button class="btn btn-sm btn-outline-info" (click)="deleteClient(client.id)">
-                                <i class="bi bi-pencil-fill"></i>
-                            </button>
-                            <button class="btn btn-sm btn-outline-danger" (click)="deleteClient(client.id)">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-info text-black">
-                    <h4 class="mb-0">Add New Client</h4>
-                </div>
-                <div class="card-body">
-                    <form>
-                        <div class="mb-8">
-                            <label for="name" class="form-label">Name</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="title"
-                              [(ngModel)]="newClient.name"
-                              name="name"
-                              required
-                            />
-                            <label for="address1" class="form-label">Address 1</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="address1"
-                              [(ngModel)]="newClient.address1"
-                              name="address1"
-                              required
-                            />
-                            <label for="address2" class="form-label">Address 2</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="address2"
-                              [(ngModel)]="newClient.address2"
-                              name="address2"
-                              required
-                            />
-                            <label for="city" class="form-label">City</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="city"
-                              [(ngModel)]="newClient.city"
-                              name="city"
-                              required
-                            />
-                            <label for="state" class="form-label">State</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="state"
-                              [(ngModel)]="newClient.state"
-                              name="state"
-                              required
-                            />
-                            <label for="phone" class="form-label">Phone number</label>
-                            <div class="input-group">
-                                <span class="input-group-text">
-                                    <i class="bi bi-telephone-fill"></i>
-                                </span>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="phone"
-                              [(ngModel)]="newClient.phone"
-                              name="phone"
-                              required
-                            />
-                            </div>
-                            <label for="email" class="form-label">Email address</label>
-                            <div class="input-group">
-                                <span class="input-group-text">
-                                <i class="bi bi-vector-pen"></i>
-                                </span>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="email"
-                                    [(ngModel)]="newClient.email"
-                                    name="email"
-                                    required
-                                />
-                            </div>
-                            <label for="username" class="form-label">User name</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="username"
-                              [(ngModel)]="newClient.username"
-                              name="username"
-                              required
-                            />
-                            <label for="password" class="form-label">Password</label>
-                            <input
-                              type="password"
-                              class="form-control"
-                              id="password"
-                              [(ngModel)]="newClient.password"
-                              name="password"
-                              required
-                            />
-
-                          </div>
-                          <label for="repassword" class="form-label">Re enter Password</label>
-                          <input
-                            type="password"
-                            class="form-control"
-                            id="repassword"                            
-                            name="repassword"
-                            required
-                          />
-                          <div class="d-grid">
-                            <button type="submit" class="btn btn-info" (click)="addClient()">
-                              <i class="bi bi-plus-circle me-2"></i>Add Client
-                            </button>
-                          </div>
-                    </form>
-                </div>
-                </div>
-            </div>
-        </div>
+<!-- Clients List Component Template -->
+<div py-4>
+  <p></p>
 </div>
+<div class="container-md">
+  <div class="card shadow mb-2" style="width: 35rem;">
+    <!-- <div class="card-header bg-info text-black">
+    <h4 class="mb-0" id="add-client">Add New Client</h4>
+  </div> -->
+    <div class="card-body">
+      <form [formGroup]="clientForm">
+        <div class="mb-6">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" formControlName="name" name="name" required />
+          <label for="address" class="form-label">Address</label>
+          <input type="text" class="form-control" formControlName="address" id="address" name="address" required />
+          <label for="phone" class="form-label">Phone number</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-telephone-fill"></i>
+            </span>
+            <input type="text" class="form-control" id="phone" formControlName="phone" name="phone" required />
+          </div>
+          <label for="email" class="form-label">Email address</label>
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-vector-pen"></i>
+            </span>
+            <input type="text" class="form-control" id="email" formControlName="email" name="email" required />
+          </div>
+          <label for="username" class="form-label">User name</label>
+          <input type="text" class="form-control" id="username" formControlName="username" name="username" required />
+          <label for="password1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="password1" formControlName="password1" name="password1"
+            required />
+
+        </div>
+        <label for="password2" class="form-label">Re enter Password</label>
+        <input type="password" class="form-control" id="password2" name="password2" required />
+        <div class="d-grid">
+          <button id="btn-submit" type="submit" class="btn btn-info" (click)="addClient()">
+            Add Client
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="offcanvas offcanvas-end w-50 show" tabindex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
+  <div class="offcanvas-header" style="background-color: #0dcaf0">
+    <h6 class="offcanvas-title" id="offcanvasLabel">Clients List</h6>
+  </div>
+  <div class="offcanvas-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto" *ngFor="let client of allClients">
+          <!-- Card for clients list -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-header bg-info text-black">
+              <h4 class="mb-0">{{client.name}}</h4>
+            </div>
+
+            <div class="card-body">
+              <!-- No clients message -->
+              <div *ngIf="allClients.length === 0" class="text-center py-4">
+                <i class="bi bi-clipboard-x fs-1 text-muted"></i>
+                <p class="mt-2 text-muted">
+                  No clients available. Add a new client to get started!
+                </p>
+              </div>
+
+              <!-- Clients list -->
+              <ul class="list-group" *ngIf="allClients.length > 0">
+                <li class=" d-flex justify-content-between align-items-left">
+                  <div class="form-check">
+                    <!-- <p class="mb-0 medium"><strong>{{client.name}} </strong>
+                                </p> -->
+                    <p class="mb-0 text-muted small">{{client.address}}
+                    <p class="mb-0 text-muted small">{{client.phone}}
+                      <i class="bi bi-telephone-fill"></i>
+                    </p>
+                    <p class="mb-0 text-muted small">{{client.email}}
+                      <i class="bi bi-vector-pen"></i>
+                    </p>
+                    <span class="badge bg-info rounded-pill">{{client.username}} </span>
+                  </div>
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a class="nav-link" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                        <i class="bi bi-three-dots"></i>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li>
+                          <a class="dropdown-item">
+                            <i class="bi bi-people"></i> Schedule Meeting
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" (click)="editClient(client.id)">
+                            <i class="bi bi-pencil-fill"></i> Edit Client
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" (click)="deleteClient(client.id)">
+                            <i class="bi bi-trash"></i> Delete Client
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -3,62 +3,62 @@
         {
             "id": 0,
             "name": "The Hobsons",
-            "address1": "25 N Atlantic Ave",
-            "address2": "",
-            "city": "Redmond",
-            "state": "WA",
+            "address": "25 N Atlantic Ave Redmond, WA",
             "phone": "(425)379-2985",
             "email": "hobson@gmail.com",
             "username": "hobson@gmail.com",
-            "password": "hobson@123"
+            "password1": "hobson@123",
+            "password2": "hobson@123"
         },
         {
             "id": 1,
             "name": "The Chandlers",
-            "address1": "67 175th Place NE",
-            "address2": "",
-            "city": "Woodinville",
-            "state": "WA",
+            "address": "67 175th Place NE Woodinville, WA",
             "phone": "(206)639-2364",
             "email": "chandler@gmail.com",
             "username": "chandler@gmail.com",
-            "password": "chandler@345"
+            "password1": "chandler@345",
+            "password2": "chandler@345"
         },
         {
             "id": 2,
             "name": "The Meyers",
-            "address1": "745 NE Plateau Street",
-            "address2": "",
-            "city": "Kirland",
-            "state": "WA",
+            "address": "745 NE Plateau Street Kirkland, WA",
             "phone": "(425)866-4355",
             "email": "meyer@gmail.com",
             "username": "meyer@gmail.com",
-            "password": "meyer@789"
+            "password1": "meyer@789",
+            "password2": "meyer@789"
         },
         {
             "id": 3,
             "name": "The Theodores",
-            "address1": "12984 215the Ave SE",
-            "address2": "",
-            "city": "Bellevue",
-            "state": "WA",
+            "address": "12984 215the Ave SE Bellevue, WA",
             "phone": "(425)674-2342",
             "email": "theodore@gmail.com", 
             "username": "theodore@gmail.com",
-            "password": "theodore@123"
+            "password1": "theodore@123", 
+            "password2": "theodore@123"
         },
         {
             "id": 4,
             "name": "The Blanchards",
-            "address1": "4534 N Tropical Road",
-            "address2": "",
-            "city": "Seattle",
-            "state": "WA",
+            "address": "4534 N Tropical Road Seattle, WA",
             "phone": "(425)674-2389",
             "email": "blanchard@gmail.com",
             "username": "blanchard@gmail.com",
-            "password": "blanchard@123"
+            "password1": "blanchard@123",
+            "password2": "blanchard@123"
+        },
+        {
+            "id": 5,
+            "name": "The Leventhals",
+            "address": "32466 NE 187th Street, Kirkland, WA",
+            "phone": "(425)234-7684",
+            "email": "leventhals@gmail.com",
+            "username": "leventhals@gmail.com",
+            "password1": "leventhals@123",
+            "password2": "leventhals@123"
         }
    ]
 }
