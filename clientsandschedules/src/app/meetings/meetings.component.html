@@ -61,7 +61,7 @@
                                 <li 
                                     class="list-group-item d-flex justify-content-end align-items-left">
                                     <div class="form-check">
-                                    <p class="mb-0 text-muted small">{{meeting.topic}}</p>
+                                    <h6>{{meeting.topic}}</h6>
                                     <p class="mb-0 text-muted small">{{meeting.noofpeople}} people are attending </p>
                                     <span class="badge bg-info rounded-pill">{{ displayMeetingTimeasUTCString(meeting.starttime)}}</span>
                                 </div>
@@ -72,12 +72,12 @@
                                       </a>
                                       <ul class="dropdown-menu">
                                         <li>
-                                          <a class="dropdown-item" >
+                                          <a class="dropdown-item" (click)="editMeeting(meeting.id)">
                                             <i class="bi bi-pencil-fill"></i> Edit Meeting
                                           </a>
                                         </li>
                                         <li>
-                                          <a class="dropdown-item" >
+                                          <a class="dropdown-item" (click)="deleteMeeting(meeting.id)">
                                             <i class="bi bi-trash"></i> Delete Meeting
                                           </a>
                                         </li>

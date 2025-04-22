@@ -71,14 +71,14 @@ export class MeetingsComponent {
     }
     this.allMeetings.push(tmpMeeting);
 
-    // Clear the form data
-    // this.meetingForm.patchValue({
-    //   clientid: 0,
-    //   clientname: '',
-    //   topic: '',
-    //   noofpeople: 0,
-    //   starttime: ''
-    // });
+    //Clear the form data
+    this.meetingForm.patchValue({
+      clientid: 0,
+      clientname: '',
+      topic: '',
+      noofpeople: 0,
+      starttime: ''
+    });
   }
 
   displayMeetingTimeasUTCString(dateTimeLocale: string) {  
@@ -88,10 +88,47 @@ export class MeetingsComponent {
       weekday: "long",
       year: "numeric",
       month: "long",
-      day: "numeric",
+      day: "numeric"
+    };
+    const options1: Intl.DateTimeFormatOptions = {
+      timeStyle: "short"
     };
     const d = new Date(dateTimeLocale);
-    return `${d.toLocaleDateString("en-US", options)} ${d.toLocaleTimeString()}` ;
+    return `${d.toLocaleDateString("en-US", options)} ${d.toLocaleTimeString("en-US", options1)}` ;
   }
 
+  editMeeting(meetingId: number){
+    this.allMeetings.map((meeting)=> {
+      if (meeting.id === meetingId) {
+        this.meetingForm.patchValue({
+          clientid: meeting.clientid,
+          topic: meeting.topic,
+          noofpeople: meeting.noofpeople,
+          starttime: meeting.starttime
+        });
+
+        // Change div header caption to reflect client data updation
+        const divAddClient = document.getElementById("add-meeting") as HTMLDivElement ;
+        if (divAddClient){
+          divAddClient.textContent = `Update '${meeting.clientname}' meeting`;
+        }
+
+        // Change button caption to reflect client data updation
+        const btnSubmit = document.getElementById("btn-submit");
+        if (btnSubmit) {
+          btnSubmit.textContent = `Update Meeting`;
+
+          // Save client id in value attribute for use by addClient() function
+          btnSubmit.setAttribute('value', meeting.id.toString());
+
+        }
+      }
+    });
+  }
+
+  deleteMeeting(meetingId: number){
+    this.allMeetings = this.allMeetings.filter(meeting => meeting.id !== meetingId);
+  }
+  
 }
+

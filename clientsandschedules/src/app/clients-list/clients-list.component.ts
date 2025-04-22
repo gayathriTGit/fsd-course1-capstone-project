@@ -31,6 +31,7 @@ export class ClientsListComponent {
 
   constructor() {
 
+    console.log(this.clientandMeetingService.loginSuccessful, this.clientandMeetingService.loginUserName);
     // Get all clients data from the json server https://localhost:3000/clients
     this.clientandMeetingService.getAllClientsList().then((clientsList: Client[])=>{
       this.allClients = clientsList;    

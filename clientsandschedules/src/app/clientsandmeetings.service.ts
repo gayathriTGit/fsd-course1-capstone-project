@@ -11,7 +11,23 @@ export class ClientsAndMeetingsService {
   readonly url = 'http://localhost:3000/clients';
   allMeetings: Meeting[] = [];
   allClients: Client[] = [];
-  constructor() { }
+  loginSuccessful: boolean = false;
+  loginUserName: string = '';
+  loginPassword: string = '';
+  useSession: boolean = false;
+  
+  constructor() { 
+    if (this.useSession === true) {
+      if (sessionStorage != null){
+        const login = sessionStorage.getItem('loginSuccess'); 
+        this.loginSuccessful = Boolean(login);
+      }
+      else {
+        this.loginSuccessful = false;
+      }
+    }
+    //console.log(this.loginSuccessful, this.loginUserName);
+  }
 
   async getAllClientsList(): Promise<Client[]> {
     if (this.allClients.length === 0) {

@@ -8,21 +8,19 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto justify-content-end mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/login"
-          routerLinkActive="active">Login</a>
-        </li>
-        <li class="nav-item">
+        <li class="nav-item" id="clients-menu" *ngIf="this.service.loginSuccessful">
           <a class="nav-link active" aria-current="page" routerLink="/clientslist"
           routerLinkActive="active">Clients</a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" id="meetings-menu" *ngIf="this.service.loginSuccessful">
           <a class="nav-link active" aria-current="page" routerLink="/meetings"
           routerLinkActive="active">Meetings</a>
+        </li>
+        <li class="nav-item" id="logout-menu" *ngIf="this.service.loginSuccessful">
+          <a class="nav-link active" aria-current="page"  routerLinkActive="active" routerLink="/home" (click)="logOut()">Logout</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-
 <router-outlet></router-outlet>
