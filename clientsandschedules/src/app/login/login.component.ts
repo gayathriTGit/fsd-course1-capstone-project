@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ClientsAndMeetingsService } from '../clientsandmeetings.service';
 
@@ -16,16 +16,18 @@ export class LoginComponent {
   
   service = inject(ClientsAndMeetingsService);
   loginSuccess: boolean = false;
-
+  platFormId: Object = inject(PLATFORM_ID);
   loginForm = new FormGroup({
     userName: new FormControl(''),
     password: new FormControl('')
   });
 
   constructor() {
-    if (sessionStorage != null){
-      const login = sessionStorage.getItem('loginSuccess'); 
-      this.loginSuccess = Boolean(login);
+    if (isPlatformBrowser(this.platFormId)){
+      if (sessionStorage != null){
+        const login = sessionStorage.getItem('loginSuccess'); 
+        this.loginSuccess = Boolean(login);
+      }
     }
     else {
       this.loginSuccess = this.service.loginSuccessful;
@@ -34,7 +36,10 @@ export class LoginComponent {
     console.log(this.service.loginSuccessful, this.service.loginUserName);
     //this.signIn();
   }
+
+
   signIn() {
+    
     if ((this.loginForm.value.userName === "anna@gmail.com") && (this.loginForm.value.password === "anna@456")) {
       this.service.loginSuccessful = true;
       this.service.loginUserName = this.loginForm.value.userName;
@@ -47,8 +52,22 @@ export class LoginComponent {
 
     }
     else {
+      this.validateForm();
+    }
+  }
+
+  validateForm(){
+    if (this.loginForm.value.userName === "") {
+      alert('Enter username');
+      document.getElementById("username")?.focus();
+    }
+    else if (this.loginForm.value.password === ""){
+      alert('Enter password');
+      document.getElementById('password')?.focus();
+    }
+    else{
       this.service.loginSuccessful = false;
       alert('Login unsuccessful!')
-    }
+    }  
   }
 }

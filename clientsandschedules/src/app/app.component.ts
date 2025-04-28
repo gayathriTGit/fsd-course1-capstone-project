@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { LoginComponent } from './login/login.component';
 import { ClientsAndMeetingsService } from './clientsandmeetings.service';
 import { CommonModule } from '@angular/common';
 
@@ -17,7 +16,7 @@ export class AppComponent {
   title = 'clientsandschedules';
   service = inject(ClientsAndMeetingsService);
 
-  
+
   logOut() {
     sessionStorage.clear();
     window.location.href="/home";

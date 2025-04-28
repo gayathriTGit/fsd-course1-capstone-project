@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { booleanAttribute, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Client } from '../client';
@@ -44,6 +44,10 @@ export class ClientsListComponent {
   ------------------------------------------------------------------*/
   addClient(){
   
+    if (this.validateForm() === false) {
+      return;
+    } 
+    
     // Identify if the client data is being added or updated
     const btnSubmit = document.getElementById("btn-submit");
     let givenId: number = this.allClients.length + 1;
@@ -88,6 +92,52 @@ export class ClientsListComponent {
       password2: ''
     })
 
+  }
+
+  validateForm(): boolean{
+    let returnValue: boolean = true;
+    if (this.clientForm.value.name === ""){
+      alert('Enter a name');
+      document.getElementById("name")?.focus();
+      returnValue = false;
+    }
+    else if(this.clientForm.value.address === ""){
+      alert("Enter an address");
+      document.getElementById("address")?.focus();
+      returnValue = false;
+    }
+    else if(this.clientForm.value.phone === ""){
+      alert("Enter a phone number");
+      document.getElementById("phone")?.focus();
+      returnValue = false;
+    }
+    else if(this.clientForm.value.email === ""){
+      alert("Enter an email");
+      document.getElementById("email")?.focus();
+      returnValue = false;
+    }
+    else if(this.clientForm.value.username === ""){
+      alert("Enter a username");
+      document.getElementById("username")?.focus();
+      returnValue = false;
+    }
+    else if(this.clientForm.value.password1 === ""){
+      alert("Enter a password");
+      document.getElementById("password1")?.focus();
+      returnValue = false;
+    }
+    else if(this.clientForm.value.password2 === ""){
+      alert(this.clientForm.value.password2);
+      alert("Enter the password");
+      document.getElementById("password2")?.focus();
+      returnValue = false;
+    }
+    else if (this.clientForm.value.password1 !== this.clientForm.value.password2){
+      alert("Password don't match. Reenter password");
+      document.getElementById("password2")?.focus();
+      returnValue = false;
+    } 
+    return returnValue;
   }
 
   /*------------------------------------------------------------------

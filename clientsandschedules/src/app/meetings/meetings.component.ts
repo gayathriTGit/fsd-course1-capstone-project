@@ -40,6 +40,9 @@ export class MeetingsComponent {
 
   addMeeting(){
 
+    if (this.validateMeeting() === false) {
+      return;
+    }
     // Identify if the meeting data is being added or updated
     const btnSubmit = document.getElementById("btn-submit");
     let givenId: number = this.allClients.length + 1;
@@ -124,6 +127,26 @@ export class MeetingsComponent {
         }
       }
     });
+  }
+
+  validateMeeting():boolean {
+    let returnValue: boolean = true;
+    if(this.meetingForm.value.topic === "") {
+      alert("Enter a topic");
+      document.getElementById("topic")?.focus();
+      returnValue = false;
+    }
+    else if(this.meetingForm.value.noofpeople === 0 ){
+      alert("Number of people attending should be greater than 0");
+      document.getElementById("noofpeople")?.focus();
+      returnValue = false;
+    }
+    else if(this.meetingForm.value.starttime === "" ){
+      alert("Enter a start time");
+      document.getElementById("starttime")?.focus();
+      returnValue = false;
+    }
+    return returnValue;
   }
 
   deleteMeeting(meetingId: number){

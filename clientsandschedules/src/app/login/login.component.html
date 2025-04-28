@@ -1,16 +1,29 @@
-<div class="container" style="width: 350px;">  
-    <form style="margin-top: 20px;" [formGroup]="loginForm" *ngIf="!this.loginSuccess">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-  
-      <div class="form-floating">
-        <input type="email" class="form-control" formControlName="userName" id="floatingInput" placeholder="name@example.com">
-        <label for="floatingInput">Username</label>
+<div class="container" style="width: 280px;">
+  <form style="margin-top: 20px;" class="row g-3 needs-validation" novalidate [formGroup]="loginForm"
+    *ngIf="!this.loginSuccess">
+    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+    <div class="col-md-12" style="text-align: left;">
+      <label for="username" class="form-label">Username</label>
+      <div class="input-group has-validation">
+        <input type="text" class="form-control" formControlName="userName" id="username" required>
+        <div class="invalid-feedback">
+          Please enter a username.
+        </div>
       </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" formControlName="password" id="floatingPassword" placeholder="Password">
-        <label for="floatingPassword">Password</label>
+    </div>
+    <div class="col-md-12" style="text-align: left;">
+      <label for="password" class="form-label">Password</label>
+      <div class="input-group has-validation">
+        <input type="password" class="form-control" formControlName="password" id="password" required>
+        <div class="invalid-feedback">
+          Please enter a password.
+        </div>
       </div>
-      <button class="btn btn-primary w-100 py-2" type="submit" (click)="signIn()">Sign in</button>
-      <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2025</p>
-    </form>
-  </div>
+    </div>
+    <div class="col-md-12" style="text-align: left;">
+      <button style="width: 100px;" class="btn btn-primary py-2" type="submit" (click)="signIn()">Sign in</button>
+    </div>
+    <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2025</p>
+  </form>
+</div>

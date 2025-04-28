@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { Client } from './client';
 import { Meeting } from './meeting';
-import { MeetingsComponent } from './meetings/meetings.component';
+import { isPlatformBrowser } from '@angular/common';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,19 @@ export class ClientsAndMeetingsService {
   loginUserName: string = '';
   loginPassword: string = '';
   useSession: boolean = false;
+  platformId: Object = Inject(PLATFORM_ID);
   
   constructor() { 
-    if (this.useSession === true) {
-      if (sessionStorage != null){
-        const login = sessionStorage.getItem('loginSuccess'); 
-        this.loginSuccessful = Boolean(login);
-      }
-      else {
-        this.loginSuccessful = false;
+     
+   if (isPlatformBrowser(this.platformId)) {
+      if (this.useSession === true) {
+        if (sessionStorage != null){
+          const login = sessionStorage.getItem('loginSuccess'); 
+          this.loginSuccessful = Boolean(login);
+        }
+        else {
+          this.loginSuccessful = false;
+        }
       }
     }
     //console.log(this.loginSuccessful, this.loginUserName);

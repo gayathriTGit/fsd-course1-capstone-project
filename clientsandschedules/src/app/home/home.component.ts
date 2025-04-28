@@ -1,7 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
-import { CommonModule  } from '@angular/common';
+import { CommonModule, isPlatformBrowser  } from '@angular/common';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ClientsAndMeetingsService } from '../clientsandmeetings.service';
 
@@ -16,12 +16,15 @@ export class HomeComponent {
 
   service = inject(ClientsAndMeetingsService);
   loginSuccess: boolean = false;
+  platformId: Object = inject(PLATFORM_ID);
 
   constructor() {
-    if (sessionStorage != null){
-      const login = sessionStorage.getItem('loginSuccess'); 
-      this.loginSuccess = Boolean(login);
-      this.service.loginSuccessful = this.loginSuccess;
+    if (isPlatformBrowser(this.platformId)) {
+      if (sessionStorage != null){
+        const login = sessionStorage.getItem('loginSuccess'); 
+        this.loginSuccess = Boolean(login);
+        this.service.loginSuccessful = this.loginSuccess;
+      }
     }
     else {
       this.loginSuccess = this.service.loginSuccessful;
